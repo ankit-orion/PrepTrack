@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Progress {
+  userId    String   @id
+  checks    Json
+  updatedAt DateTime @updatedAt
+
+  @@map("progress")
+}
