@@ -17,6 +17,7 @@ const C = {
   orange:   "var(--orange)",
   orangeL:  "var(--orangeL)",
   blue:     "var(--blue)",
+  blueL:    "var(--blueL)",
   emerald:  "var(--emerald)",
   amber:    "var(--amber)",
   rose:     "var(--rose)",
