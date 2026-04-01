@@ -11,12 +11,9 @@ async function getSession() {
 const EMPTY_BLOCKS = () => Array.from({ length: 90 }, () => Array(5).fill(false));
 const EMPTY_QUESTIONS = (): Record<string, boolean[]> => ({});
 
-// The `checks` JSON column stores: { blocks: boolean[][], questions: Record<string, boolean[]> }
-// Old format (plain boolean[][]) is handled gracefully.
 function parseStored(raw: unknown): { blocks: boolean[][]; questions: Record<string, boolean[]> } {
   if (!raw) return { blocks: EMPTY_BLOCKS(), questions: EMPTY_QUESTIONS() };
   if (Array.isArray(raw)) {
-    // Legacy format — plain blocks array
     return { blocks: raw as boolean[][], questions: EMPTY_QUESTIONS() };
   }
   const obj = raw as Record<string, unknown>;
@@ -34,9 +31,8 @@ export async function GET() {
 
   const row = await prisma.progress.findUnique({ where: { userId: session.userId } });
   const { blocks, questions } = parseStored(row?.checks);
-  const notes = (row?.notes as string[]) || [];
 
-  return NextResponse.json({ blocks, questions, notes });
+  return NextResponse.json({ blocks, questions });
 }
 
 export async function PUT(req: NextRequest) {
@@ -45,13 +41,13 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { blocks, questions, notes } = await req.json();
+  const { blocks, questions } = await req.json();
   const checks = { blocks, questions };
 
   await prisma.progress.upsert({
     where:  { userId: session.userId },
-    update: { checks, notes: notes || [] },
-    create: { userId: session.userId, checks, notes: notes || [] },
+    update: { checks },
+    create: { userId: session.userId, checks },
   });
 
   return NextResponse.json({ ok: true });

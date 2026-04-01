@@ -10,7 +10,6 @@ datasource db {
 model Progress {
   userId    String   @id
   checks    Json
-  notes     Json?    @default("[]")
   updatedAt DateTime @updatedAt
 
   @@map("progress")

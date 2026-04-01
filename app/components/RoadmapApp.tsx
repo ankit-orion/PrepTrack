@@ -530,8 +530,6 @@ export default function RoadmapApp() {
   const [tierFilter, setTierFilter] = useState(0);
   const [checks, setChecks] = useState<boolean[][]>(EMPTY_BLOCKS);
   const [qChecks, setQChecks] = useState<Record<string, boolean[]>>(EMPTY_QCHECKS);
-  const [notes, setNotes] = useState<string[]>([]);
-  const [newNote, setNewNote] = useState("");
   const [saveTimeout, setSaveTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [currentDayIdx, setCurrentDayIdx] = useState(0);
 
@@ -561,7 +559,6 @@ export default function RoadmapApp() {
       .then(d => {
         if (d.blocks) setChecks(d.blocks);
         if (d.questions) setQChecks(d.questions);
-        if (d.notes) setNotes(d.notes);
       })
       .catch(() => {});
   }, [isLoggedIn]);
@@ -569,7 +566,6 @@ export default function RoadmapApp() {
   const triggerSave = useCallback((
     nb: boolean[][] = checks,
     nq: Record<string, boolean[]> = qChecks,
-    nn: string[] = notes,
     immediate = false
   ) => {
     if (saveTimeout) clearTimeout(saveTimeout);
@@ -577,27 +573,12 @@ export default function RoadmapApp() {
       fetch("/api/progress", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ blocks: nb, questions: nq, notes: nn }),
+        body: JSON.stringify({ blocks: nb, questions: nq }),
       });
     };
     if (immediate) run();
     else setSaveTimeout(setTimeout(run, 800));
-  }, [saveTimeout, checks, qChecks, notes]);
-
-  const addNote = () => {
-    if (newNote.trim() && notes.length < 3) {
-      const next = [...notes, newNote.trim().slice(0, 25)];
-      setNotes(next);
-      setNewNote("");
-      triggerSave(checks, qChecks, next, true);
-    }
-  };
-
-  const removeNote = (idx: number) => {
-    const next = notes.filter((_, i) => i !== idx);
-    setNotes(next);
-    triggerSave(checks, qChecks, next, true);
-  };
+  }, [saveTimeout, checks, qChecks]);
 
   const filteredCompanies = useMemo(
     () => tierFilter === 0 ? companies : companies.filter(c => c.tier === tierFilter),
@@ -619,7 +600,7 @@ export default function RoadmapApp() {
       return nextRow;
     });
     setChecks(next);
-    triggerSave(next, qChecks, notes);
+    triggerSave(next, qChecks);
   }
 
   function handleQCheck(dayIndex: number, qIndex: number, val: boolean) {
@@ -628,14 +609,13 @@ export default function RoadmapApp() {
     dayArr[qIndex] = val;
     const nextQ = { ...qChecks, [dayKey]: dayArr };
     setQChecks(nextQ);
-    triggerSave(checks, nextQ, notes);
+    triggerSave(checks, nextQ);
   }
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
     setIsLoggedIn(false);
     setUsername("");
-    setNotes([]);
     setChecks(EMPTY_BLOCKS());
     setQChecks(EMPTY_QCHECKS());
   }
@@ -901,7 +881,7 @@ export default function RoadmapApp() {
         {/* ── RIGHT COLUMN (SIDEBAR) ── */}
         <div className="sidebar-col">
           {/* GREETING CARD */}
-          <div style={{ background: C.surface, borderRadius: 28, overflow: "hidden", border: `1px solid ${C.border}`, boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
+          <div style={{ background: C.surface, borderRadius: 28, overflow: "hidden", border: `1px solid ${C.border}`, boxShadow: '0 4px 15px rgba(0,0,0,0.02)', marginBottom: 24 }}>
              <div style={{ height: 130, position: "relative" }}>
                  <img src="/minimalist_profile.png" alt="Decoration" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent, rgba(255,255,255,1) 95%)" }} />
@@ -935,43 +915,6 @@ export default function RoadmapApp() {
                    </div>
                 </div>
              </div>
-          </div>
-
-          {/* PERSONAL STICKY NOTES */}
-          <div style={{ background: C.surface, padding: 28, borderRadius: 28, border: `1px solid ${C.border}`, boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
-             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
-                <label style={{ fontSize: "0.85rem", fontWeight: 800 }}>Personal Todos</label>
-                <div style={{ fontSize: "0.7rem", color: C.muted, fontWeight: 700 }}>{notes.length}/3</div>
-             </div>
-             
-             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: notes.length > 0 ? 20 : 0 }}>
-                {notes.map((note, i) => (
-                  <div key={i} style={{ background: C.bg, padding: "12px 14px", borderRadius: 14, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "space-between", animation: 'slideIn 0.3s ease' }}>
-                    <span style={{ fontSize: "0.8rem", fontWeight: 600, color: C.text }}>{note}</span>
-                    <button onClick={() => removeNote(i)} style={{ background: 'none', border: 'none', color: C.rose, cursor: 'pointer', padding: 4, display: 'flex' }}>
-                       <Icons.Trash />
-                    </button>
-                  </div>
-                ))}
-             </div>
-
-             {notes.length < 3 ? (
-               <div style={{ background: C.bg, borderRadius: 16, padding: 6, display: "flex", alignItems: "center", border: `1px solid ${C.border}` }}>
-                  <input 
-                    type="text" 
-                    placeholder="New reminder (max 25)..." 
-                    value={newNote}
-                    onKeyDown={e => e.key === 'Enter' && addNote()}
-                    onChange={e => setNewNote(e.target.value.slice(0, 25))}
-                    style={{ flex: 1, background: "transparent", border: "none", padding: "10px 14px", fontSize: "0.85rem", fontWeight: 600, outline: "none", color: C.text }} 
-                  />
-                  <button onClick={addNote} style={{ width: 36, height: 36, borderRadius: 12, background: C.orange, color: "#fff", border: "none", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: `0 4px 10px ${C.orange}30` }}>
-                    <Icons.Plus />
-                  </button>
-               </div>
-             ) : (
-                <div style={{ textAlign: 'center', fontSize: "0.75rem", color: C.muted, fontWeight: 500 }}>Focus on these 3 tasks first!</div>
-             )}
           </div>
 
           {/* DAILY MISSIONS CARD */}
