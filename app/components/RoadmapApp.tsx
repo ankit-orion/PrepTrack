@@ -566,40 +566,37 @@ export default function RoadmapApp() {
       .catch(() => {});
   }, [isLoggedIn]);
 
-  const saveToDb = useCallback((nb = checks, nq = qChecks, nn = notes) => {
+  const triggerSave = useCallback((
+    nb: boolean[][] = checks,
+    nq: Record<string, boolean[]> = qChecks,
+    nn: string[] = notes,
+    immediate = false
+  ) => {
     if (saveTimeout) clearTimeout(saveTimeout);
-    const t = setTimeout(() => {
+    const run = () => {
       fetch("/api/progress", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ blocks: nb, questions: nq, notes: nn }),
       });
-    }, 1200);
-    setSaveTimeout(t);
+    };
+    if (immediate) run();
+    else setSaveTimeout(setTimeout(run, 800));
   }, [saveTimeout, checks, qChecks, notes]);
-
-  const saveToDbImmediate = (nb = checks, nq = qChecks, nn = notes) => {
-    if (saveTimeout) clearTimeout(saveTimeout);
-    fetch("/api/progress", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ blocks: nb, questions: nq, notes: nn }),
-    });
-  };
 
   const addNote = () => {
     if (newNote.trim() && notes.length < 3) {
       const next = [...notes, newNote.trim().slice(0, 25)];
       setNotes(next);
       setNewNote("");
-      saveToDbImmediate(checks, qChecks, next);
+      triggerSave(checks, qChecks, next, true);
     }
   };
 
   const removeNote = (idx: number) => {
     const next = notes.filter((_, i) => i !== idx);
     setNotes(next);
-    saveToDbImmediate(checks, qChecks, next);
+    triggerSave(checks, qChecks, next, true);
   };
 
   const filteredCompanies = useMemo(
@@ -622,7 +619,7 @@ export default function RoadmapApp() {
       return nextRow;
     });
     setChecks(next);
-    saveToDb(next, qChecks, notes);
+    triggerSave(next, qChecks, notes);
   }
 
   function handleQCheck(dayIndex: number, qIndex: number, val: boolean) {
@@ -631,7 +628,7 @@ export default function RoadmapApp() {
     dayArr[qIndex] = val;
     const nextQ = { ...qChecks, [dayKey]: dayArr };
     setQChecks(nextQ);
-    saveToDb(checks, nextQ, notes);
+    triggerSave(checks, nextQ, notes);
   }
 
   async function handleLogout() {
