@@ -9,7 +9,7 @@ export const metadata: Metadata = {
      description: "Master DSA, System Design, and Frontend in 90 Days. Personal tracking for you and your friends.",
      images: [
        {
-         url: "/minimalist_banner.png",
+         url: "/og_preview.png",
          width: 1200,
          height: 630,
          alt: "PrepPlan Preview"
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "90-Day Interview Battle Plan",
-    images: ["/minimalist_banner.png"]
+    images: ["/og_preview.png"]
   }
 };
 

@@ -7,22 +7,177 @@ import DAY_QUESTIONS from "@/app/data/dayQuestions";
 // ─── THEME ───
 // ─── THEME ───
 const C = {
-  bg:       "#f8fafc",
-  surface:  "#ffffff",
-  surface2: "#f1f5f9",
-  border:   "#f1f5f9",
-  text:     "#1e293b",
-  muted:    "#64748b",
-  faint:    "#94a3b8",
-  orange:   "#ff7a5c", // Primary - Coral/Orange
-  orangeL:  "#fff5f2",
-  emerald:  "#2dd4bf", // Teal
-  amber:    "#fbbf24",
-  rose:     "#fb7185",
-  sky:      "#38bdf8",
-  violet:   "#818cf8",
-  indigo:   "#6366f1",
+  bg:       "var(--bg)",
+  surface:  "var(--surface)",
+  surface2: "var(--border)",
+  border:   "var(--border)",
+  text:     "var(--text)",
+  muted:    "var(--muted)",
+  faint:    "var(--faint)",
+  orange:   "var(--orange)",
+  orangeL:  "var(--orangeL)",
+  blue:     "var(--blue)",
+  emerald:  "var(--emerald)",
+  amber:    "var(--amber)",
+  rose:     "var(--rose)",
+  sky:      "var(--sky)",
+  violet:   "var(--violet)",
+  indigo:   "var(--indigo)",
 };
+
+/** Professional Minimalist SVG Icons */
+const Icons = {
+  Moon: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  ),
+  Sun: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  ),
+  Logout: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+      <polyline points="16 17 21 12 16 7"></polyline>
+      <line x1="21" y1="12" x2="9" y2="12"></line>
+    </svg>
+  ),
+  Home: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+    </svg>
+  ),
+  Target: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <circle cx="12" cy="12" r="6"></circle>
+      <circle cx="12" cy="12" r="2"></circle>
+    </svg>
+  ),
+  Building: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+      <line x1="9" y1="22" x2="9" y2="22"></line>
+      <line x1="9" y1="2" x2="9" y2="2"></line>
+    </svg>
+  ),
+  Search: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+  ),
+  Rocket: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+      <path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"></path>
+      <path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5"></path>
+    </svg>
+  ),
+  Flame: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3 3.5 3 5 5.5 5 8.5a4.5 4.5 0 0 1-9 0c0-1.15.33-2.21.9-3.1a2.5 2.5 0 0 0 1.6 3.1z"></path>
+    </svg>
+  ),
+  Briefcase: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+    </svg>
+  ),
+  Calendar: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+      <line x1="16" y1="2" x2="16" y2="6"></line>
+      <line x1="8" y1="2" x2="8" y2="6"></line>
+      <line x1="3" y1="10" x2="21" y2="10"></line>
+    </svg>
+  ),
+  Check: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  ),
+  Pulse: ({ color }: { color: string }) => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+      <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, animation: 'pulse 2s infinite' }} />
+      <style>{`@keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 ${color}70; } 70% { transform: scale(1); box-shadow: 0 0 0 10px ${color}00; } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 ${color}00; } }`}</style>
+    </div>
+  ),
+  Brain: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M12 2a14.5 14.5 0 0 0 0 20"></path>
+      <path d="M2 12h20"></path>
+    </svg>
+  ),
+  Chart: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="18" y1="20" x2="18" y2="10"></line>
+      <line x1="12" y1="20" x2="12" y2="4"></line>
+      <line x1="6" y1="20" x2="6" y2="14"></line>
+    </svg>
+  ),
+  Sparkles: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m12 3 1.91 5.81L20 10.73l-4.5 4.38L16.55 21 12 18.23 7.45 21l1.05-5.89L4 10.73l6.09-1.92L12 3z"></path>
+    </svg>
+  ),
+  Plus: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"></line>
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>
+  ),
+  Trash: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="3 6 5 6 21 6"></polyline>
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+    </svg>
+  ),
+  ChevronRight: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  )
+};
+
+/** Theme Toggle Hook/Component */
+function ThemeToggle() {
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    const saved = localStorage.getItem("theme") || "light";
+    setTheme(saved);
+    document.documentElement.setAttribute("data-theme", saved);
+  }, []);
+  const toggle = () => {
+    const next = theme === "light" ? "dark" : "light";
+    setTheme(next);
+    localStorage.setItem("theme", next);
+    document.documentElement.setAttribute("data-theme", next);
+  };
+  return (
+    <button onClick={toggle} style={{
+      background: "transparent", border: `1px solid ${C.border}`, width: 36, height: 36, borderRadius: 10,
+      display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: theme === "light" ? C.muted : C.text,
+      transition: 'all 0.2s'
+    }}>
+      {theme === "light" ? <Icons.Moon /> : <Icons.Sun />}
+    </button>
+  );
+}
 
 const PHASES = [
   { num: 1, label: "DSA Foundations",   sub: "Days 1–14",  color: C.emerald, range: [0,  13] },
@@ -171,11 +326,12 @@ const DIFF_COLOR = { E: C.emerald, M: C.amber, H: C.rose } as const;
 const DIFF_LABEL = { E: "Easy", M: "Medium", H: "Hard" } as const;
 
 function DayRow({
-  dayIndex, isExpanded, onToggle, checks, onCheck, qChecks, onQCheck,
+  dayIndex, isExpanded, onToggle, checks, onCheck, qChecks, onQCheck, isToday
 }: {
   dayIndex: number; isExpanded: boolean; onToggle: () => void;
   checks: boolean[]; onCheck: (i: number, v: boolean) => void;
   qChecks: boolean[]; onQCheck: (i: number, v: boolean) => void;
+  isToday: boolean;
 }) {
   const plan = getDayPlan(dayIndex);
   const { phase } = plan;
@@ -219,6 +375,7 @@ function DayRow({
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <span style={{ fontSize: "0.95rem", fontWeight: 700, color: C.text }}>{dayStr} {monthStr}</span>
+            {isToday && <Tag color={C.orange}>Today</Tag>}
             {plan.isWeekend && <Tag color={C.sky}>Weekend</Tag>}
             {allDone && <Tag color={C.emerald}>Completed</Tag>}
           </div>
@@ -372,6 +529,8 @@ export default function RoadmapApp() {
   const [tierFilter, setTierFilter] = useState(0);
   const [checks, setChecks] = useState<boolean[][]>(EMPTY_BLOCKS);
   const [qChecks, setQChecks] = useState<Record<string, boolean[]>>(EMPTY_QCHECKS);
+  const [notes, setNotes] = useState<string[]>([]);
+  const [newNote, setNewNote] = useState("");
   const [saveTimeout, setSaveTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [currentDayIdx, setCurrentDayIdx] = useState(0);
 
@@ -389,26 +548,58 @@ export default function RoadmapApp() {
 
   useEffect(() => {
     if (!isLoggedIn) return;
+    
+    // Fetch profile
+    fetch("/api/auth/me")
+      .then(r => r.json())
+      .then(d => { if (d.userId) setUsername(d.userId); });
+
+    // Fetch progress
     fetch("/api/progress")
       .then(r => r.json())
       .then(d => {
         if (d.blocks) setChecks(d.blocks);
         if (d.questions) setQChecks(d.questions);
+        if (d.notes) setNotes(d.notes);
       })
       .catch(() => {});
   }, [isLoggedIn]);
 
-  const saveToDb = useCallback((nextBlocks: boolean[][], nextQ: Record<string, boolean[]>) => {
+  const saveToDb = useCallback((nb = checks, nq = qChecks, nn = notes) => {
     if (saveTimeout) clearTimeout(saveTimeout);
     const t = setTimeout(() => {
       fetch("/api/progress", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ blocks: nextBlocks, questions: nextQ }),
+        body: JSON.stringify({ blocks: nb, questions: nq, notes: nn }),
       });
-    }, 800);
+    }, 1200);
     setSaveTimeout(t);
-  }, [saveTimeout]);
+  }, [saveTimeout, checks, qChecks, notes]);
+
+  const saveToDbImmediate = (nb = checks, nq = qChecks, nn = notes) => {
+    if (saveTimeout) clearTimeout(saveTimeout);
+    fetch("/api/progress", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ blocks: nb, questions: nq, notes: nn }),
+    });
+  };
+
+  const addNote = () => {
+    if (newNote.trim() && notes.length < 3) {
+      const next = [...notes, newNote.trim().slice(0, 25)];
+      setNotes(next);
+      setNewNote("");
+      saveToDbImmediate(checks, qChecks, next);
+    }
+  };
+
+  const removeNote = (idx: number) => {
+    const next = notes.filter((_, i) => i !== idx);
+    setNotes(next);
+    saveToDbImmediate(checks, qChecks, next);
+  };
 
   const filteredCompanies = useMemo(
     () => tierFilter === 0 ? companies : companies.filter(c => c.tier === tierFilter),
@@ -445,6 +636,8 @@ export default function RoadmapApp() {
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
     setIsLoggedIn(false);
+    setUsername("");
+    setNotes([]);
     setChecks(EMPTY_BLOCKS());
     setQChecks(EMPTY_QCHECKS());
   }
@@ -486,17 +679,30 @@ export default function RoadmapApp() {
         .dashboard-container { max-width: 1440px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 340px; gap: 24px; padding: 24px; flex: 1; overflow: hidden; }
         .main-col { min-width: 0; overflow-y: auto; padding-right: 8px; scroll-behavior: smooth; }
         .sidebar-col { display: flex; flex-direction: column; gap: 24px; overflow-y: auto; }
-        @media (max-width: 1100px) { .dashboard-container { grid-template-columns: 1fr; } .sidebar-col { display: none; } }
+        
+        @media (max-width: 1100px) {
+          .dashboard-container { grid-template-columns: 1fr; padding: 16px; gap: 16px; }
+          .sidebar-col { display: none; }
+          .search-wrapper { display: none !important; }
+          .nav-label { display: none; }
+          .user-details { display: none !important; }
+          .banner-inner { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+          .banner-stats { width: 100% !important; max-width: 120px !important; margin: 0 auto !important; }
+          .banner-title { font-size: 1.8rem !important; }
+          .header-main { padding: 0 16px !important; }
+          .phase-tabs { overflow-x: auto; white-space: nowrap; max-width: 100%; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+          .phase-tabs button { flex-shrink: 0; }
+        }
       `}</style>
 
       {/* ── TOP NAVBAR ── */}
-      <header style={{
+      <header className="header-main" style={{
         height: 72, background: C.surface, borderBottom: `1px solid ${C.border}`,
         display: "flex", alignItems: "center", padding: "0 32px", position: "sticky", top: 0, zIndex: 100,
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, marginRight: 40 }}>
-          <div style={{ width: 36, height: 36, borderRadius: 10, background: C.orange, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.2rem", color: "#fff", boxShadow: `0 4px 12px ${C.orange}40` }}>
-            🚀
+          <div style={{ width: 36, height: 36, borderRadius: 10, background: C.orange, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", boxShadow: `0 4px 12px ${C.orange}40` }}>
+            <Icons.Rocket />
           </div>
           <div>
             <div style={{ fontSize: "1.1rem", fontWeight: 800, fontFamily: "Outfit", letterSpacing: "-0.02em" }}>PrepTrack</div>
@@ -505,9 +711,9 @@ export default function RoadmapApp() {
 
         <nav style={{ display: "flex", gap: 4 }}>
           {[
-            { id: "planner", icon: "🏠", label: "Home" },
-            { id: "strategy", icon: "🎯", label: "Strategy" },
-            { id: "companies", icon: "🏢", label: "Tiers" },
+            { id: "planner", icon: <Icons.Home />, label: "Home" },
+            { id: "strategy", icon: <Icons.Target />, label: "Strategy" },
+            { id: "companies", icon: <Icons.Building />, label: "Tiers" },
           ].map(item => (
             <button key={item.id} onClick={() => setTab(item.id as any)} style={{
               display: "flex", alignItems: "center", gap: 8, padding: "8px 16px", borderRadius: 12,
@@ -515,25 +721,27 @@ export default function RoadmapApp() {
               color: tab === item.id ? C.orange : C.muted,
               border: "none", fontWeight: 700, fontSize: "0.85rem", transition: "all 0.2s", cursor: 'pointer'
             }}>
-              <span style={{ fontSize: "1.1rem" }}>{item.icon}</span>
-              {item.label}
+              {item.icon}
+              <span className="nav-label">{item.label}</span>
             </button>
           ))}
         </nav>
 
-        <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+        <div className="search-wrapper" style={{ flex: 1, display: "flex", justifyContent: "center" }}>
           <div style={{ position: "relative", width: "100%", maxWidth: 400 }}>
-            <span style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: C.faint }}>🔍</span>
+            <span style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: C.faint, display: 'flex', alignItems: 'center' }}>
+              <Icons.Search />
+            </span>
             <input type="text" placeholder="Search topics, or companies..." style={{
               width: "100%", background: C.bg, padding: "10px 14px 10px 40px", borderRadius: 12,
-              fontSize: "0.85rem", fontWeight: 500, outline: "none", border: `1px solid transparent`, transition: "all 0.2s",
+              color: C.text, fontSize: "0.85rem", fontWeight: 500, outline: "none", border: `1px solid transparent`, transition: "all 0.2s",
             }} />
           </div>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-             <div style={{ textAlign: "right" }}>
+             <div className="user-details" style={{ textAlign: "right" }}>
                 <div style={{ fontSize: "0.85rem", fontWeight: 700 }}>{displayName}</div>
                 <div style={{ fontSize: "0.7rem", color: C.muted, fontWeight: 500 }}>Software Engineer</div>
              </div>
@@ -541,15 +749,17 @@ export default function RoadmapApp() {
                {displayName.charAt(0)}
              </div>
           </div>
-          <button onClick={handleLogout} style={{ 
-            marginLeft: 8,
-            display: "flex", alignItems: "center", gap: 8, padding: "8px 14px", borderRadius: 12,
-            background: "#fef2f2", border: "1px solid #fee2e2", 
-            color: "#ef4444", fontWeight: 700, fontSize: "0.8rem", cursor: "pointer", transition: "all 0.2s"
-          }}>
-            <span>🚪</span>
-            Logout
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <ThemeToggle />
+            <button onClick={handleLogout} style={{ 
+              display: "flex", alignItems: "center", gap: 8, padding: "8px 14px", borderRadius: 12,
+              background: "#fef2f2", border: "1px solid #fee2e2", 
+              color: "#ef4444", fontWeight: 700, fontSize: "0.8rem", cursor: "pointer", transition: "all 0.2s"
+            }}>
+              <Icons.Logout />
+              <span className="nav-label">Logout</span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -566,8 +776,8 @@ export default function RoadmapApp() {
                 <img src="/minimalist_banner.png" alt="Banner" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0.1) 60%)" }} />
                 
-                <div style={{ position: "relative", zIndex: 1, display: "flex", gap: 32, alignItems: "center", width: "100%" }}>
-                  <div style={{ width: 140, background: "rgba(255,255,255,0.9)", padding: 18, borderRadius: 24, backdropFilter: "blur(12px)", boxShadow: "0 15px 35px rgba(0,0,0,0.2)", textAlign: 'center' }}>
+                <div className="banner-inner" style={{ position: "relative", zIndex: 1, display: "flex", gap: 32, alignItems: "center", width: "100%" }}>
+                  <div className="banner-stats" style={{ width: 140, background: "rgba(255,255,255,0.9)", padding: 18, borderRadius: 24, backdropFilter: "blur(12px)", boxShadow: "0 15px 35px rgba(0,0,0,0.2)", textAlign: 'center' }}>
                      <div style={{ fontSize: "0.6rem", fontWeight: 800, color: C.orange, textTransform: "uppercase", letterSpacing: '0.1em', marginBottom: 10 }}>Total Progress</div>
                      <ProgressRing pct={overallPct} color={C.orange} size={70} />
                   </div>
@@ -576,7 +786,7 @@ export default function RoadmapApp() {
                        <Tag color={C.orange}>PHASE {currentPhase.num}</Tag>
                        <span style={{ color: "rgba(255,255,255,0.9)", fontSize: "0.9rem", fontWeight: 600 }}>{currentPhase.label}</span>
                      </div>
-                     <h1 style={{ fontSize: "2.4rem", fontWeight: 800, color: "#fff", fontFamily: "Outfit", margin: 0, lineHeight: 1, letterSpacing: '-0.02em' }}>
+                     <h1 className="banner-title" style={{ fontSize: "2.4rem", fontWeight: 800, color: "#fff", fontFamily: "Outfit", margin: 0, lineHeight: 1, letterSpacing: '-0.02em' }}>
                        {currentDayIdx + 1 === 1 ? "Let's Get Started!" : `Day ${currentDayIdx + 1} of 90`}
                      </h1>
                      <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.95rem", marginTop: 12, fontWeight: 500, maxWidth: 500 }}>
@@ -587,9 +797,9 @@ export default function RoadmapApp() {
               </div>
 
               {/* CONTROLS */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20, flexWrap: "wrap", gap: 12 }}>
                 <h2 style={{ fontSize: "1.3rem", fontWeight: 800, fontFamily: "Outfit" }}>Upcoming Journey</h2>
-                <div style={{ display: "flex", gap: 6, background: C.surface, padding: 4, borderRadius: 14, border: `1px solid ${C.border}`, boxShadow: '0 2px 5px rgba(0,0,0,0.02)' }}>
+                <div className="phase-tabs" style={{ display: "flex", gap: 6, background: C.surface, padding: 4, borderRadius: 14, border: `1px solid ${C.border}`, boxShadow: '0 2px 5px rgba(0,0,0,0.02)' }}>
                    <button onClick={() => setActivePhase(0)} style={{
                      padding: "8px 16px", borderRadius: 10, border: "none", fontSize: "0.8rem", fontWeight: 700,
                      background: activePhase === 0 ? C.bg : "transparent", color: activePhase === 0 ? C.text : C.muted, cursor: "pointer", transition: 'all 0.2s'
@@ -608,6 +818,7 @@ export default function RoadmapApp() {
                 {filteredDays.map(i => (
                   <DayRow
                     key={i} dayIndex={i}
+                    isToday={currentDayIdx === i}
                     isExpanded={expandedDay === i}
                     onToggle={() => setExpandedDay(expandedDay === i ? -1 : i)}
                     checks={checks[i]}
@@ -701,7 +912,10 @@ export default function RoadmapApp() {
                 <div style={{ width: 72, height: 72, borderRadius: 22, background: C.orange, margin: "0 auto 16px", border: "5px solid #fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.8rem", color: "#fff", fontWeight: 800, boxShadow: '0 8px 20px rgba(0,0,0,0.1)' }}>
                   {displayName.charAt(0)}
                 </div>
-                <h3 style={{ fontSize: "1.2rem", fontWeight: 800, fontFamily: "Outfit" }}>Hi, {displayName}! 👋</h3>
+                <h3 style={{ fontSize: "1.2rem", fontWeight: 800, fontFamily: "Outfit", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+                   Hi, {displayName}!
+                   <span style={{ color: C.orange, display: 'flex', animation: 'floating 3s ease-in-out infinite' }}><Icons.Rocket /></span>
+                </h3>
                 <p style={{ fontSize: "0.85rem", color: C.muted, lineHeight: 1.5, marginTop: 10 }}>
                   Build the future you've always imagined. One commit at a time.
                 </p>
@@ -725,44 +939,77 @@ export default function RoadmapApp() {
              </div>
           </div>
 
-          {/* QUICK INPUT */}
+          {/* PERSONAL STICKY NOTES */}
           <div style={{ background: C.surface, padding: 28, borderRadius: 28, border: `1px solid ${C.border}`, boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
-             <label style={{ fontSize: "0.85rem", fontWeight: 800, display: "block", marginBottom: 14 }}>Focus of the Moment</label>
-             <div style={{ background: C.bg, borderRadius: 16, padding: 6, display: "flex", alignItems: "center", border: `1px solid ${C.border}` }}>
-                <input type="text" placeholder="I want to learn..." style={{ flex: 1, background: "transparent", border: "none", padding: "10px 14px", fontSize: "0.85rem", fontWeight: 600, outline: "none" }} />
-                <button style={{ width: 36, height: 36, borderRadius: 12, background: C.orange, color: "#fff", border: "none", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: `0 4px 10px ${C.orange}30` }}>➔</button>
+             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
+                <label style={{ fontSize: "0.85rem", fontWeight: 800 }}>Personal Todos</label>
+                <div style={{ fontSize: "0.7rem", color: C.muted, fontWeight: 700 }}>{notes.length}/3</div>
              </div>
-             <div style={{ display: "flex", gap: 6, marginTop: 16, flexWrap: "wrap" }}>
-                {["Today", "Next Week", "Big Goal"].map(t => <span key={t} style={{ fontSize: "0.65rem", fontWeight: 700, color: C.muted, background: C.bg, padding: "5px 12px", borderRadius: 10 }}>{t}</span>)}
-             </div>
-          </div>
-
-          {/* CHAT-STYLE LIST */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 4px" }}>
-                <h3 style={{ fontSize: "0.8rem", fontWeight: 800, textTransform: "uppercase", color: C.muted, letterSpacing: "0.05em" }}>Opportunity Map</h3>
-                <button style={{ background: 'none', border: 'none', fontSize: "0.75rem", color: C.orange, fontWeight: 800, cursor: 'pointer' }}>View All</button>
-             </div>
-             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {[
-                  { name: "Top Picks for You", sub: "Based on Azure exp", icon: "💎", color: C.orange, dot: true },
-                  { name: "Fast Hiring Startups", sub: "React/Node focus", icon: "⚡", color: C.sky, dot: false },
-                  { name: "Global Remote", sub: "Wellfound + Turing", icon: "🌍", color: C.violet, dot: true },
-                ].map(item => (
-                  <div key={item.name} style={{
-                    display: "flex", alignItems: "center", gap: 14, padding: "14px 18px", background: C.surface, borderRadius: 24, 
-                    border: `1px solid ${C.border}`, cursor: "pointer", transition: "all 0.2s"
-                  }} onMouseEnter={e => e.currentTarget.style.borderColor = item.color}>
-                    <div style={{ width: 44, height: 44, borderRadius: 14, background: `${item.color}10`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.3rem" }}>
-                      {item.icon}
-                    </div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: "0.9rem", fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</div>
-                      <div style={{ fontSize: "0.75rem", color: C.muted, fontWeight: 500 }}>{item.sub}</div>
-                    </div>
-                    {item.dot && <div style={{ width: 8, height: 8, borderRadius: 100, background: item.color }}></div>}
+             
+             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: notes.length > 0 ? 20 : 0 }}>
+                {notes.map((note, i) => (
+                  <div key={i} style={{ background: C.bg, padding: "12px 14px", borderRadius: 14, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "space-between", animation: 'slideIn 0.3s ease' }}>
+                    <span style={{ fontSize: "0.8rem", fontWeight: 600, color: C.text }}>{note}</span>
+                    <button onClick={() => removeNote(i)} style={{ background: 'none', border: 'none', color: C.rose, cursor: 'pointer', padding: 4, display: 'flex' }}>
+                       <Icons.Trash />
+                    </button>
                   </div>
                 ))}
+             </div>
+
+             {notes.length < 3 ? (
+               <div style={{ background: C.bg, borderRadius: 16, padding: 6, display: "flex", alignItems: "center", border: `1px solid ${C.border}` }}>
+                  <input 
+                    type="text" 
+                    placeholder="New reminder (max 25)..." 
+                    value={newNote}
+                    onKeyDown={e => e.key === 'Enter' && addNote()}
+                    onChange={e => setNewNote(e.target.value.slice(0, 25))}
+                    style={{ flex: 1, background: "transparent", border: "none", padding: "10px 14px", fontSize: "0.85rem", fontWeight: 600, outline: "none", color: C.text }} 
+                  />
+                  <button onClick={addNote} style={{ width: 36, height: 36, borderRadius: 12, background: C.orange, color: "#fff", border: "none", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: `0 4px 10px ${C.orange}30` }}>
+                    <Icons.Plus />
+                  </button>
+               </div>
+             ) : (
+                <div style={{ textAlign: 'center', fontSize: "0.75rem", color: C.muted, fontWeight: 500 }}>Focus on these 3 tasks first!</div>
+             )}
+          </div>
+
+          {/* DAILY MISSIONS CARD */}
+          <div style={{ background: C.surface, borderRadius: 28, border: `1px solid ${C.border}`, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+             <div style={{ padding: "20px 24px", borderBottom: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "space-between", background: C.blueL }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ color: C.blue }}><Icons.Calendar /></span>
+                  <span style={{ fontSize: "0.8rem", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em", color: C.blue }}>Today's Mission</span>
+                </div>
+                <Icons.Pulse color={C.blue} />
+             </div>
+             
+             <div style={{ padding: "24px", display: "flex", flexDirection: "column", gap: 14 }}>
+                {DAY_QUESTIONS[currentDayIdx]?.slice(0, 3).map((q, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                    <div style={{ width: 22, height: 22, borderRadius: 6, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2, color: C.faint }}>
+                      <Icons.Check />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontSize: "0.85rem", fontWeight: 700, color: C.text, lineHeight: 1.4 }}>{q.name}</div>
+                      {q.difficulty && (
+                        <div style={{ fontSize: "0.65rem", fontWeight: 800, color: C.orange, marginTop: 4 }}>Goal: {q.difficulty === 'E' ? 'Intro' : q.difficulty === 'M' ? 'Deep Dive' : 'Advanced'}</div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+                
+                <button 
+                  onClick={() => setExpandedDay(currentDayIdx)}
+                  style={{ 
+                    marginTop: 10, background: C.bg, border: `1px solid ${C.border}`, padding: "12px", borderRadius: 12,
+                    fontSize: "0.8rem", fontWeight: 700, color: C.text, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 
+                  }}>
+                  Go to Today's Tasks
+                  <span style={{ fontSize: '1rem' }}>→</span>
+                </button>
              </div>
           </div>
         </div>

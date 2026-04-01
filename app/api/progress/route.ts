@@ -34,23 +34,24 @@ export async function GET() {
 
   const row = await prisma.progress.findUnique({ where: { userId: session.userId } });
   const { blocks, questions } = parseStored(row?.checks);
+  const notes = (row?.notes as string[]) || [];
 
-  return NextResponse.json({ blocks, questions });
+  return NextResponse.json({ blocks, questions, notes });
 }
 
 export async function PUT(req: NextRequest) {
-  const session = await getSession();
-  if (!session.isLoggedIn) {
+  const session = await getIronSession<SessionData>(await cookies(), sessionOptions);
+  if (!session.isLoggedIn || !session.userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { blocks, questions } = await req.json();
+  const { blocks, questions, notes } = await req.json();
   const checks = { blocks, questions };
 
   await prisma.progress.upsert({
     where:  { userId: session.userId },
-    update: { checks },
-    create: { userId: session.userId, checks },
+    update: { checks, notes: notes || [] },
+    create: { userId: session.userId, checks, notes: notes || [] },
   });
 
   return NextResponse.json({ ok: true });
