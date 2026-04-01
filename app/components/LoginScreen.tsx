@@ -295,7 +295,11 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
           <Icons.Shield />
         </div>
 
-        <div style={{ display: "inline-block", background: C.bg, color: "#16a34a", padding: "6px 16px", borderRadius: 100, fontSize: "0.75rem", fontWeight: 700, marginBottom: 24, border: "1px solid #dcfce7", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, maxWidth: 300, margin: '0 auto 24px' }}>
+        <div style={{ 
+          background: C.bg, color: "#16a34a", padding: "6px 16px", borderRadius: 100, fontSize: "0.75rem", 
+          fontWeight: 700, border: "1px solid #dcfce7", display: 'flex', alignItems: 'center', 
+          justifyContent: 'center', gap: 8, maxWidth: 300, margin: '0 auto 24px' 
+        }}>
           <Icons.Pulse color="#16a34a" /> Live: 25,000+ engineers preparing today
         </div>
         <h1 className="hero-title" style={{ fontSize: "3.8rem", fontWeight: 800, fontFamily: "Outfit", color: C.text, lineHeight: 1.1, letterSpacing: "-0.04em", maxWidth: 800, margin: "0 auto 20px" }}>
