@@ -615,23 +615,23 @@ export default function RoadmapApp() {
   }, [activePhase]);
 
   function handleCheck(dayIndex: number, blockIndex: number, val: boolean) {
-    setChecks(prev => {
-      const next = prev.map(row => [...row]);
-      next[dayIndex][blockIndex] = val;
-      saveToDb(next, qChecks);
-      return next;
+    const next = checks.map((row, i) => {
+      if (i !== dayIndex) return row;
+      const nextRow = [...row];
+      nextRow[blockIndex] = val;
+      return nextRow;
     });
+    setChecks(next);
+    saveToDb(next, qChecks, notes);
   }
 
   function handleQCheck(dayIndex: number, qIndex: number, val: boolean) {
-    setQChecks(prev => {
-      const dayKey = String(dayIndex);
-      const dayArr = [...(prev[dayKey] ?? [])];
-      dayArr[qIndex] = val;
-      const next = { ...prev, [dayKey]: dayArr };
-      saveToDb(checks, next);
-      return next;
-    });
+    const dayKey = String(dayIndex);
+    const dayArr = [...(qChecks[dayKey] ?? [])];
+    dayArr[qIndex] = val;
+    const nextQ = { ...qChecks, [dayKey]: dayArr };
+    setQChecks(nextQ);
+    saveToDb(checks, nextQ, notes);
   }
 
   async function handleLogout() {
